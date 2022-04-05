@@ -1,0 +1,23 @@
+name: Check Markdown links
+
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+  
+jobs:
+  markdown-link-check:
+    name: Check for broken links
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Run link check 
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-verbose-mode: 'yes'
+        folder-path: 'src/pages/en/'
+        config-file: '.github/workflows/.mlc_config.json'
